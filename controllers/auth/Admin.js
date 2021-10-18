@@ -10,8 +10,8 @@ function createToken(data) {
     return jwt.sign(data, 'DonateSmile');
 }
 
-const getTokenData = async (token) => {
-    let adminData = await Admin.findOne({ token: token }).exec();
+var getTokenData = async (token) => {
+    let adminData = await ADMIN.findOne({ token: token }).exec();
     // console.log('adminData', adminData);
     return adminData;
 }
@@ -24,7 +24,7 @@ var register = async (req, res) => {
     });
     let matched = await v.check().then((val) => val);
     if (!matched) {
-        return res.status(200).send({ status: false, error: v.errors });
+        return res.status(400).send({ status: false, error: v.errors });
     }
     let adminData = {
         _id: mongoose.Types.ObjectId(),
@@ -96,6 +96,7 @@ var login = async (req, res) => {
 }
 
 module.exports = {
+    getTokenData,
     register,
     login
 }

@@ -11,7 +11,7 @@ var AdminController = require('../controllers/auth/Admin');
 
 
 //Middleware
-const parmisoen = [
+const permission = [
     {
         url: "/admin/login",
     },
@@ -31,7 +31,7 @@ const parmisoen = [
 ]
 
 user.middleware = async (req, res, next) => {
-    if (parmisoen.filter(it => it.url == req.url).length > 0) {
+    if (permission.filter(it => it.url == req.url).length > 0) {
         next();
     } 
     else {
@@ -45,9 +45,9 @@ user.middleware = async (req, res, next) => {
             if (userType == "Admin") {
                 userData = await AdminController.getTokenData(authorization);
             }
-            if (userType == "User") {
-                userData = await UserController.getTokenData(authorization);
-            }
+            // if (userType == "User") {
+            //     userData = await UserController.getTokenData(authorization);
+            // }
 
            
             if (userData && userData != null) {
