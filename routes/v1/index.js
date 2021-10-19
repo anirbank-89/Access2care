@@ -1,20 +1,58 @@
 var express = require('express');
+var multer = require('multer');
+
 var router = express.Router();
 
-/** GET home page */
-router.get('/', (req, res, next) => {
-    res.send({ status: false });
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        console.log(file);
+        // cb(null, path.join(__dirname, 'uploads/stolen'));
+        cb(null, "uploads/assessment_audios");
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        var filetype = "";
+        if (file.mimetype === "audio/mp3") {
+            filetype = "mp3";
+        }
+        if (file.mimetype === "audio/mpeg") {
+            filetype = "mpeg";
+        }
+        pro_audio =
+            "user-" +
+            Math.floor(100000 + Math.random() * 900000) +
+            "-" +
+            Date.now() +
+            "." +
+            filetype;
+
+        audio = pro_audio;
+
+        console.log("audio_array", audio);
+        cb(null, pro_audio);
+    },
 });
+var upload = multer({ storage: storage });
 
+
+/**------------------- Controller section -------------------*/
 const ADMIN = require('../../controllers/auth/Admin');
+const USER_ASSESSMENT_TEST = require('../../controllers/user/AssessmentTest');
+/**----------------- Controller section end -----------------*/
 
-const middleware  = require('../../service/middleware').middleware;
+const middleware = require('../../service/middleware').middleware;
 
 const AdminRoute = require('./admin');
 
 /**====================== without login url ====================== */
+// GET home page
+router.get('/', (req, res, next) => {
+    res.send({ status: false });
+});
 router.post('/admin/register', ADMIN.register);
 router.post('/admin/login', ADMIN.login);
+
+router.post('/user/audio-upload', upload.single("audio"), USER_ASSESSMENT_TEST.uploadAudio2);
 /**==================== without login url end =====================*/
 
 router.use(middleware);
