@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 const { Validator } = require('node-input-validator');
+
+var cloudinaryConfig = require('../../service/cloudinary');
+var Upload = require('../../service/upload');
 
 const HOME_BANNER = require('../../models/home_banners');
 
@@ -20,6 +24,22 @@ var createBanner = async (req, res) => {
         _id: mongoose.Types.ObjectId(),
         heading: req.body.heading,
         description: req.body.description
+    }
+    if (
+        req.body.audio!="" && 
+        req.body.audio!=null && 
+        typeof req.body.audio!="undefined"
+        ) {
+        bannerData.audio = req.body.audio;
+    }
+    if (
+        req.body.image=="" && 
+        req.body.image==null && 
+        typeof req.body.image=="undefined"
+        ) {
+        bannerData.image = null;
+    } else {
+        bannerData.image = JSON.parse(req.body.audio);
     }
 
     const NEW_BANNER = new HOME_BANNER(bannerData);
@@ -61,7 +81,31 @@ var getBannerById = async (req, res) => {
         });
 }
 
+var uploadAudio = async (req, res, next) => {
+    let audio_url = await Upload.uploadAudioFile(req, "assessment_audios");
+
+    const { path } = req.file; // file becomes available in req at this point
+
+    const fName = req.file.originalname.split(".")[0];
+    cloudinaryConfig.v2.uploader.upload(
+        path,
+        {
+            resource_type: "raw",
+            public_id: `assessment_audios/${fName}`,
+        },
+
+        // Send cloudinary response or catch error
+        (err, audio) => {
+            if (err) return res.status(500).json({ status: false, error: err });
+
+            fs.unlinkSync(path);
+            res.status(200).json({ status: true, server_url: audio_url, cloudinary_data: audio });
+        }
+    );
+}
+
 module.exports = {
     createBanner,
-    getBannerById
+    getBannerById,
+    uploadAudio
 }
