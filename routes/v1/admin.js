@@ -41,6 +41,7 @@ const HOME_BANNER = require('../../controllers/admin/HomeBanner');
 const ASSESSMENT_QSTN = require('../../controllers/admin/AssessmentQstn');
 const HIV_INFORMATION = require('../../controllers/admin/HIVInformation');
 const PARTNER_INFO = require('../../controllers/admin/PartnerInfo');
+const RESOURCE_INFO = require('../../controllers/admin/Resources');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/audio-upload', upload.single("audio"), Upload.uploadAudio);
@@ -64,5 +65,11 @@ router.get('/partner-info', PARTNER_INFO.viewAllPartners);
 router.get('/partner-info/:id', PARTNER_INFO.viewPartnerById);
 router.put('/partner-info/:id', PARTNER_INFO.editPartner);
 router.delete('/partner-info/:id', PARTNER_INFO.deletePartner);
+
+router.post('/resource', RESOURCE_INFO.addResource);
+router.get('/resource', RESOURCE_INFO.viewAllResources);
+router.get('/resource/:id', RESOURCE_INFO.viewResourceById);
+router.put('/resource/:id', RESOURCE_INFO.editResorce);
+router.delete('/resource/:id', RESOURCE_INFO.deleteResource);
 
 module.exports = router;
