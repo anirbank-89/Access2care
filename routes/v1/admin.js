@@ -21,5 +21,9 @@ router.get('/assessment-qstn/:id', ASSESSMENT_QSTN.getQstnById);
 router.delete('/assessment-qstn/:id', ASSESSMENT_QSTN.deleteQstn);
 
 router.post('/hiv-information', HIV_INFORMATION.addSegment);
+router.get('/hiv-information', HIV_INFORMATION.viewAllSegments);
+router.get('/hiv-information/:id', HIV_INFORMATION.viewSegmentById);
+router.put('/hiv-information/:id', HIV_INFORMATION.editSegment);
+router.delete('/hiv-information/:id', HIV_INFORMATION.deleteSegment);
 
 module.exports = router;
