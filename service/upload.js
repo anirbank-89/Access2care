@@ -14,6 +14,7 @@ const uploadAudioFile = async (req, folder) => {
     return file_name;
 }
 
+// use for all image uploads in various segments
 var segmentImage = async (req, res) => {
     let imagUrl = '';
     let image_url = await uploadFile(req, "hiv_segments");
