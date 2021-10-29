@@ -47,6 +47,7 @@ const RESOURCE_INFO = require('../../controllers/admin/Resources');
 router.post('/audio-upload', upload.single("audio"), Upload.uploadAudio);
 
 router.post('/home-banner', HOME_BANNER.createBanner); // 2nd argument to .post() - upload.single("audio")
+router.get('/home-banner', HOME_BANNER.getBanner);
 router.get('/home-banner/:id', HOME_BANNER.getBannerById);
 
 router.post('/assessment-qstn', ASSESSMENT_QSTN.createQstn);
