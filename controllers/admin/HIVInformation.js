@@ -21,6 +21,13 @@ var addSegment = async (req, res) => {
         description: req.body.description
     }
     if (
+        req.body.image != "" ||
+        req.body.image != null ||
+        typeof req.body.image != "undefined"
+    ) {
+        segmentData.image = req.body.image;
+    }
+    if (
         req.body.audio != "" ||
         req.body.audio != null ||
         typeof req.body.audio != "undefined"

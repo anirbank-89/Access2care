@@ -11,6 +11,7 @@ const HIV_INFORMATION_SEGMENT = new Schema({
         type: String,
         required: true
     },
+    image: String,
     audio: String
 });
 

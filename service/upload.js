@@ -14,6 +14,20 @@ const uploadAudioFile = async (req, folder) => {
     return file_name;
 }
 
+var segmentImage = async (req, res) => {
+    let imagUrl = '';
+    let image_url = await uploadFile(req, "hiv_segments");
+    if (typeof (req.file) != 'undefined' || req.file != '' || req.file != null) {
+        imagUrl = image_url
+    }
+
+    return res.status(200).send({
+        status: true,
+        data: imagUrl,
+        error: null
+    })
+}
+
 var uploadAudio = async (req, res, next) => {
     let audio_url = await uploadAudioFile(req, "assessment_audios");
 
@@ -44,5 +58,6 @@ var uploadAudio = async (req, res, next) => {
 module.exports = {
     uploadFile,
     uploadAudioFile,
+    segmentImage,
     uploadAudio
 };

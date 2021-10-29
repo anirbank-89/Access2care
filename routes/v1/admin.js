@@ -1,9 +1,14 @@
 var express = require('express');
 var multer = require('multer');
 
+var Upload = require('../../service/upload');
+
 var router = express.Router();
 
-var storage = multer.diskStorage({
+var storage1 = multer.memoryStorage();
+var upload1 = multer({ storage: storage1 });
+
+var storage2 = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log(file);
         // cb(null, path.join(__dirname, 'uploads/stolen'));
@@ -32,9 +37,7 @@ var storage = multer.diskStorage({
         cb(null, pro_audio);
     },
 });
-var upload = multer({ storage: storage });
-
-var Upload = require('../../service/upload');
+var upload2 = multer({ storage: storage2 });
 
 /** -------------------- Controllers section -------------------- */
 const HOME_BANNER = require('../../controllers/admin/HomeBanner');
@@ -44,7 +47,8 @@ const PARTNER_INFO = require('../../controllers/admin/PartnerInfo');
 const RESOURCE_INFO = require('../../controllers/admin/Resources');
 /** ------------------ Controllers section end ------------------ */
 
-router.post('/audio-upload', upload.single("audio"), Upload.uploadAudio);
+router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
+router.post('/audio-upload', upload2.single("audio"), Upload.uploadAudio);
 
 router.post('/home-banner', HOME_BANNER.createBanner); // 2nd argument to .post() - upload.single("audio")
 router.get('/home-banner', HOME_BANNER.getBanner);
