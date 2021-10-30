@@ -41,7 +41,7 @@ const USER_ASSESSMENT_TEST = require('../../controllers/user/AssessmentTest');
 const HOME_BANNER = require('../../controllers/user/HomeBanner');
 const HIV_INFORMATION = require('../../controllers/user/HIVInformation');
 const PARTNER_INFO = require('../../controllers/user/PartnerInfo');
-const RESOURCE_INFO = require('../../controllers/user/Resources');
+const QUOTES_INFO = require('../../controllers/user/Quotes');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -67,8 +67,8 @@ router.get('/user/hiv-information/:id', HIV_INFORMATION.viewSegmentById);
 router.get('/user/partner-info', PARTNER_INFO.viewAllPartners);
 router.get('/user/partner-info/:id', PARTNER_INFO.viewPartnerById);
 
-router.get('/user/resource', RESOURCE_INFO.viewAllResources);
-router.get('/user/resource/:id', RESOURCE_INFO.viewResourceById);
+router.get('/user/quote', QUOTES_INFO.viewAllQuotes);
+router.get('/user/quote/:id', QUOTES_INFO.viewQuoteById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

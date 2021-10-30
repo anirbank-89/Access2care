@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const RESOURCES_SCHEMA = new Schema({
+const QUOTES_SCHEMA = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    name:{
+    quote:{
         type: String,
         required: true,
         unique: true
     },
-    description:{
+    author:{
         type: String,
         required: true
     },
@@ -16,4 +16,4 @@ const RESOURCES_SCHEMA = new Schema({
     audio: String
 });
 
-module.exports = mongoose.model("resources", RESOURCES_SCHEMA);
+module.exports = mongoose.model("quotes", QUOTES_SCHEMA);

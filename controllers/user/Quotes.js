@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 const { Validator } = require('node-input-validator');
 
-var resourceInfo = require('../../models/resources');
+var quotesInfo = require('../../models/quotes');
 
-var addResource = async (req, res) => {
+var addQuote = async (req, res) => {
     const V = new Validator(req.body, {
-        name: 'required',
-        description: 'required'
+        quote: 'required',
+        author: 'required'
     });
     let matched = V.check().then(val => val);
 
@@ -15,89 +15,90 @@ var addResource = async (req, res) => {
         return res.status(400).json({ status: false, errors: V.errors });
     }
 
-    let resourceData = {
+    let quoteData = {
         _id: mongoose.Types.ObjectId(),
-        name: req.body.name,
-        description: req.body.description
+        quote: req.body.quote,
+        author: req.body.author
     }
     if (
         req.body.image != "" ||
         req.body.image != null ||
         typeof req.body.image != "undefined"
     ) {
-        resourceData.image = req.body.image;
+        quoteData.image = req.body.image;
     }
     if (
         req.body.audio != "" ||
         req.body.audio != null ||
         typeof req.body.audio != "undefined"
     ) {
-        resourceData.audio = req.body.audio;
+        quoteData.audio = req.body.audio;
     }
 
-    const NEW_RESOURCE = new resourceInfo(resourceData);
+    const NEW_QUOTE = new quotesInfo(quoteData);
 
-    return NEW_RESOURCE.save((err, docs) => {
+    return NEW_QUOTE.save((err, docs) => {
         if (!err) {
             res.status(200).json({
                 status: true,
-                message: "New resource info added successfully!",
+                message: "New quote info added successfully!",
                 data: docs
             });
         }
         else {
             res.status(500).json({
                 status: false,
-                message: "Failed to add resource info. Server error.",
+                message: "Failed to add quote info. Server error.",
                 error: err.message
             });
         }
     });
 }
 
-var viewAllResources = async (req, res) => {
-    var resources = await resourceInfo.find().exec();
+var viewAllQuotes = async (req, res) => {
+    var quotes = await quotesInfo.find().exec();
 
-    if (resources.length > 0) {
+    if (quotes.length > 0) {
         return res.status(200).json({
             status: true,
-            message: "All resources successfully get.",
-            data: resources
+            message: "All quotes successfully get.",
+            data: quotes
         });
     }
     else {
-        return res.status(500).json({
-            status: false,
-            message: "Failed to get resources. Server error."
+        return res.status(200).json({
+            status: true,
+            message: "No quotes to show.",
+            data: null
         });
     }
 }
 
-var viewResourceById = async (req, res) => {
+var viewQuoteById = async (req, res) => {
     var id = req.params.id;
 
-    var resource = await resourceInfo.findById({ _id: id }).exec();
+    var quote = await quotesInfo.findById({ _id: id }).exec();
 
-    if (resource != "" || resource != null) {
+    if (quote != "" || quote != null) {
         return res.status(200).json({
             status: true,
-            message: "Resource successfully get.",
-            data: resource
+            message: "Quote successfully get.",
+            data: quote
         });
     }
     else {
         return res.status(500).json({
             status: false,
-            message: "Invalid id.",
+            message: "Invalid id. Server error.",
             error: err.message
         });
     }
 }
 
-var editResorce = async (req, res) => {
+var editQuote = async (req, res) => {
     const V = new Validator(req.body, {
-        name: 'required',
-        description: 'required'
+        quote: 'required',
+        author: 'required'
     });
     let matched = V.check().then(val => val);
 
@@ -107,7 +108,7 @@ var editResorce = async (req, res) => {
 
     var id = req.params.id;
 
-    return resourceInfo.findByIdAndUpdate(
+    return quotesInfo.findByIdAndUpdate(
         { _id: id },
         req.body,
         { new: true },
@@ -115,14 +116,14 @@ var editResorce = async (req, res) => {
             if (!err) {
                 res.status(200).json({
                     status: true,
-                    message: "Resource info successfully edited.",
+                    message: "Quote info successfully edited.",
                     data: docs
                 });
             }
             else {
                 res.status(500).json({
                     status: false,
-                    message: "Invalid id.",
+                    message: "Invalid id. Server error.",
                     error: err.message
                 });
             }
@@ -130,23 +131,23 @@ var editResorce = async (req, res) => {
     );
 }
 
-var deleteResource = async (req, res) => {
+var deleteQuote = async (req, res) => {
     var id = req.params.id;
 
-    return resourceInfo.findByIdAndDelete(
+    return quotesInfo.findByIdAndDelete(
         { _id: id },
         (err, docs) => {
             if (!err) {
                 res.status(200).json({
                     status: true,
-                    message: "Resource info deleted successfully.",
+                    message: "Quote info deleted successfully.",
                     data: docs
                 });
             }
             else {
                 res.status(500).json({
                     status: false,
-                    message: "Invalid id.",
+                    message: "Invalid id. Server error",
                     error: err.message
                 });
             }
@@ -154,9 +155,9 @@ var deleteResource = async (req, res) => {
 }
 
 module.exports = {
-    addResource,
-    viewAllResources,
-    viewResourceById,
-    editResorce,
-    deleteResource
+    addQuote,
+    viewAllQuotes,
+    viewQuoteById,
+    editQuote,
+    deleteQuote
 }
