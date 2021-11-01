@@ -3,7 +3,16 @@ var Schema = mongoose.Schema;
 
 const QUOTES_SCHEMA = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    quote:{
+    quote_line1:{
+        type: String,
+        required: true,
+        unique: true
+    },
+    quote_line2:{
+        type: String,
+        required: true
+    },
+    quote_line3:{
         type: String,
         required: true,
         unique: true

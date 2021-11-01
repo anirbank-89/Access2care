@@ -44,6 +44,7 @@ const PARTNER_INFO = require('../../controllers/user/PartnerInfo');
 const QUOTES_INFO = require('../../controllers/user/Quotes');
 const ABOUT_US_INFO = require('../../controllers/user/AboutUs');
 const PRIVACY_INFO = require('../../controllers/user/PrivacyNDataPolicy');
+const CONTACT_INFO = require('../../controllers/user/ContactInfo');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -77,6 +78,9 @@ router.get('/user/about-us/:id', ABOUT_US_INFO.viewSegmentById);
 
 router.get('/user/privacy-and-data-policy', PRIVACY_INFO.viewAllSegments);
 router.get('/user/privacy-and-data-policy/:id', PRIVACY_INFO.viewSegmentById);
+
+router.get('/user/contact-info', CONTACT_INFO.viewAllInfos);
+router.get('/user/contact-info/:id', CONTACT_INFO.viewInfoById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

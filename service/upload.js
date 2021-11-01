@@ -26,7 +26,7 @@ var segmentImage = async (req, res) => {
         status: true,
         data: imagUrl,
         error: null
-    })
+    });
 }
 
 var uploadAudio = async (req, res, next) => {

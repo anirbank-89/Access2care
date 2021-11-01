@@ -6,7 +6,9 @@ var quotesInfo = require('../../models/quotes');
 
 var addQuote = async (req, res) => {
     const V = new Validator(req.body, {
-        quote: 'required',
+        quote_line1: 'required',
+        quote_line2: 'required',
+        quote_line3: 'required',
         author: 'required'
     });
     let matched = V.check().then(val => val);
@@ -17,7 +19,9 @@ var addQuote = async (req, res) => {
 
     let quoteData = {
         _id: mongoose.Types.ObjectId(),
-        quote: req.body.quote,
+        quote_line1: req.body.quote_line1,
+        quote_line2: req.body.quote_line2,
+        quote_line3: req.body.quote_line3,
         author: req.body.author
     }
     if (

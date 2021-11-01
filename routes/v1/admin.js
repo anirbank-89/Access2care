@@ -47,6 +47,7 @@ const PARTNER_INFO = require('../../controllers/admin/PartnerInfo');
 const QUOTES = require('../../controllers/admin/Quotes');
 const ABOUT_US_INFO = require('../../controllers/admin/AboutUs');
 const PRIVACY_INFO = require('../../controllers/admin/PrivacyNDataPolicy');
+const CONTACT_INFO = require('../../controllers/admin/ContactInfo');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -92,5 +93,12 @@ router.get('/privacy-and-data-policy', PRIVACY_INFO.viewAllSegments);
 router.get('/privacy-and-data-policy/:id', PRIVACY_INFO.viewSegmentById);
 router.put('/privacy-and-data-policy/:id', PRIVACY_INFO.editSegment);
 router.delete('/privacy-and-data-policy/:id', PRIVACY_INFO.deleteSegment);
+
+router.post('/contact-info', CONTACT_INFO.addNEditInfo);
+router.post('/contact-info/image-upload', upload1.single("image"), CONTACT_INFO.imageUpload);
+router.post('/contact-info/audio-upload', upload2.single("audio"), CONTACT_INFO.audioUpload);
+router.get('/contact-info', CONTACT_INFO.viewAllInfos);
+router.get('/contact-info/:id', CONTACT_INFO.viewInfoById);
+router.delete('/contact-info/:id', CONTACT_INFO.deleteContactInfo);
 
 module.exports = router;
