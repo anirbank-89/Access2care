@@ -96,8 +96,69 @@ var getBannerById = async (req, res) => {
         });
 }
 
+var editBanner = async (req, res) => {
+    const V = new Validator(req.body, {
+        heading: 'required',
+        description: 'required'
+    });
+    let matched = V.check().then(val => val);
+
+    if (!matched) {
+        return res.status(400).json({ status: false, errors: V.errors });
+    }
+
+    var id = req.params.id;
+
+    return HOME_BANNER.findOneAndUpdate(
+        { _id: mongoose.Types.ObjectId(id) },
+        req.body,
+        { new: true },
+        (err, docs) => {
+            if (!err) {
+                res.status(200).json({
+                    status: true,
+                    message: "Banner info successfully edited.",
+                    data: docs
+                });
+            }
+            else {
+                res.status(500).json({
+                    status: false,
+                    message: "Invalid id.",
+                    error: err.message
+                });
+            }
+        }
+    );
+}
+
+var deleteBanner = async (req, res) => {
+    var id = req.params.id;
+
+    return HOME_BANNER.findByIdAndDelete(
+        { _id: id },
+        (err, docs) => {
+            if (!err) {
+                res.status(200).json({
+                    status: true,
+                    message: "Banner info deleted successfully.",
+                    data: docs
+                });
+            }
+            else {
+                res.status(500).json({
+                    status: false,
+                    message: "Invalid id.",
+                    error: err.message
+                });
+            }
+        });
+}
+
 module.exports = {
     createBanner,
     getBanner,
-    getBannerById
+    getBannerById,
+    editBanner,
+    deleteBanner
 }

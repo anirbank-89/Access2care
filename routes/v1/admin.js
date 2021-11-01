@@ -54,6 +54,8 @@ router.post('/audio-upload', upload2.single("audio"), Upload.uploadAudio);
 router.post('/home-banner', HOME_BANNER.createBanner); // 2nd argument to .post() - upload.single("audio")
 router.get('/home-banner', HOME_BANNER.getBanner);
 router.get('/home-banner/:id', HOME_BANNER.getBannerById);
+router.put('/home-banner/:id', HOME_BANNER.editBanner);
+router.delete('/home-banner/:id', HOME_BANNER.deleteBanner);
 
 router.post('/assessment-qstn', ASSESSMENT_QSTN.createQstn);
 router.get('/assessment-qstn', ASSESSMENT_QSTN.getAllQstns);
