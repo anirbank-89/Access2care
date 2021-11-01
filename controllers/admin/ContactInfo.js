@@ -116,7 +116,7 @@ var audioUpload = async (req, res, next) => {
             res.status(200).json({
                 status: true,
                 server_url: audio_url,
-                cloudinary_data: audio.secure_url
+                cloudinary_url: audio.secure_url
             });
         }
     );

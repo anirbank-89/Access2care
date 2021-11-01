@@ -48,6 +48,7 @@ const QUOTES = require('../../controllers/admin/Quotes');
 const ABOUT_US_INFO = require('../../controllers/admin/AboutUs');
 const PRIVACY_INFO = require('../../controllers/admin/PrivacyNDataPolicy');
 const CONTACT_INFO = require('../../controllers/admin/ContactInfo');
+const USER_ENQUIRY = require('../../controllers/admin/UserEnquiry');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -100,5 +101,8 @@ router.post('/contact-info/audio-upload', upload2.single("audio"), CONTACT_INFO.
 router.get('/contact-info', CONTACT_INFO.viewAllInfos);
 router.get('/contact-info/:id', CONTACT_INFO.viewInfoById);
 router.delete('/contact-info/:id', CONTACT_INFO.deleteContactInfo);
+
+router.get('/enquiry', USER_ENQUIRY.getAllEnquiries);
+router.get('/enquiry/:id', USER_ENQUIRY.getEnquiryById);
 
 module.exports = router;
