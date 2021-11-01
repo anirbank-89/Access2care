@@ -45,6 +45,7 @@ const ASSESSMENT_QSTN = require('../../controllers/admin/AssessmentQstn');
 const HIV_INFORMATION = require('../../controllers/admin/HIVInformation');
 const PARTNER_INFO = require('../../controllers/admin/PartnerInfo');
 const QUOTES = require('../../controllers/admin/Quotes');
+const ABOUT_US_INFO = require('../../controllers/admin/AboutUs');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -76,5 +77,11 @@ router.get('/quote', QUOTES.viewAllQuotes);
 router.get('/quote/:id', QUOTES.viewQuoteById);
 router.put('/quote/:id', QUOTES.editQuote);
 router.delete('/quote/:id', QUOTES.deleteQuote);
+
+router.post('/about-us', ABOUT_US_INFO.addSegment);
+router.get('/about-us', ABOUT_US_INFO.viewAllSegments);
+router.get('/about-us/:id', ABOUT_US_INFO.viewSegmentById);
+router.put('/about-us/:id', ABOUT_US_INFO.editSegment);
+router.delete('/about-us/:id', ABOUT_US_INFO.deleteSegment);
 
 module.exports = router;

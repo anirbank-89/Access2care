@@ -42,6 +42,7 @@ const HOME_BANNER = require('../../controllers/user/HomeBanner');
 const HIV_INFORMATION = require('../../controllers/user/HIVInformation');
 const PARTNER_INFO = require('../../controllers/user/PartnerInfo');
 const QUOTES_INFO = require('../../controllers/user/Quotes');
+const ABOUT_US_INFO = require('../../controllers/user/AboutUs');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -69,6 +70,9 @@ router.get('/user/partner-info/:id', PARTNER_INFO.viewPartnerById);
 
 router.get('/user/quote', QUOTES_INFO.viewAllQuotes);
 router.get('/user/quote/:id', QUOTES_INFO.viewQuoteById);
+
+router.get('/user/about-us', ABOUT_US_INFO.viewAllSegments);
+router.get('/user/about-us/:id', ABOUT_US_INFO.viewSegmentById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);
