@@ -49,6 +49,7 @@ const ABOUT_US_INFO = require('../../controllers/admin/AboutUs');
 const PRIVACY_INFO = require('../../controllers/admin/PrivacyNDataPolicy');
 const CONTACT_INFO = require('../../controllers/admin/ContactInfo');
 const USER_ENQUIRY = require('../../controllers/admin/UserEnquiry');
+const FAQ = require('../../controllers/admin/FAQ');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -104,5 +105,13 @@ router.delete('/contact-info/:id', CONTACT_INFO.deleteContactInfo);
 
 router.get('/enquiry', USER_ENQUIRY.getAllEnquiries);
 router.get('/enquiry/:id', USER_ENQUIRY.getEnquiryById);
+
+router.post('/faq', FAQ.addFaq);
+router.post('/faq/image-upload', upload1.single("image"), FAQ.imageUpload);
+router.post('/faq/audio-upload', upload2.single("audio"), FAQ.audioUpload);
+router.get('/faq', FAQ.viewAllFAQs);
+router.get('/faq/:id', FAQ.viewFAQById);
+router.put('/faq/:id', FAQ.editFAQ);
+router.delete('/faq/:id', FAQ.deleteFAQ);
 
 module.exports = router;
