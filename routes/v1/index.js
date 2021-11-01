@@ -43,6 +43,7 @@ const HIV_INFORMATION = require('../../controllers/user/HIVInformation');
 const PARTNER_INFO = require('../../controllers/user/PartnerInfo');
 const QUOTES_INFO = require('../../controllers/user/Quotes');
 const ABOUT_US_INFO = require('../../controllers/user/AboutUs');
+const PRIVACY_INFO = require('../../controllers/user/PrivacyNDataPolicy');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -73,6 +74,9 @@ router.get('/user/quote/:id', QUOTES_INFO.viewQuoteById);
 
 router.get('/user/about-us', ABOUT_US_INFO.viewAllSegments);
 router.get('/user/about-us/:id', ABOUT_US_INFO.viewSegmentById);
+
+router.get('/user/privacy-and-data-policy', PRIVACY_INFO.viewAllSegments);
+router.get('/user/privacy-and-data-policy/:id', PRIVACY_INFO.viewSegmentById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

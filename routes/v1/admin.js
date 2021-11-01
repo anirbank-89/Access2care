@@ -46,6 +46,7 @@ const HIV_INFORMATION = require('../../controllers/admin/HIVInformation');
 const PARTNER_INFO = require('../../controllers/admin/PartnerInfo');
 const QUOTES = require('../../controllers/admin/Quotes');
 const ABOUT_US_INFO = require('../../controllers/admin/AboutUs');
+const PRIVACY_INFO = require('../../controllers/admin/PrivacyNDataPolicy');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -85,5 +86,11 @@ router.get('/about-us', ABOUT_US_INFO.viewAllSegments);
 router.get('/about-us/:id', ABOUT_US_INFO.viewSegmentById);
 router.put('/about-us/:id', ABOUT_US_INFO.editSegment);
 router.delete('/about-us/:id', ABOUT_US_INFO.deleteSegment);
+
+router.post('/privacy-and-data-policy', PRIVACY_INFO.addSegment);
+router.get('/privacy-and-data-policy', PRIVACY_INFO.viewAllSegments);
+router.get('/privacy-and-data-policy/:id', PRIVACY_INFO.viewSegmentById);
+router.put('/privacy-and-data-policy/:id', PRIVACY_INFO.editSegment);
+router.delete('/privacy-and-data-policy/:id', PRIVACY_INFO.deleteSegment);
 
 module.exports = router;
