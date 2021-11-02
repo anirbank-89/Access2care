@@ -10,12 +10,12 @@ const QUOTES_SCHEMA = new Schema({
     },
     quote_line2:{
         type: String,
-        required: true
-    },
-    quote_line3:{
-        type: String,
         required: true,
         unique: true
+    },
+    quote_tagline:{
+        type: String,
+        default: 'AIDS'
     },
     author:{
         type: String,
