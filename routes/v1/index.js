@@ -47,6 +47,7 @@ const PRIVACY_INFO = require('../../controllers/user/PrivacyNDataPolicy');
 const CONTACT_INFO = require('../../controllers/user/ContactInfo');
 const USER_ENQUIRY = require('../../controllers/user/UserEnquiry');
 const FAQ = require('../../controllers/user/FAQ');
+const BLOG = require('../../controllers/user/Blog');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -88,6 +89,9 @@ router.post('/user/enquiry', USER_ENQUIRY.addEnquiry);
 
 router.get('/user/faq', FAQ.viewAllFAQs);
 router.get('/user/faq/:id', FAQ.viewFAQById);
+
+router.get('/user/blog', BLOG.viewAllBlogs);
+router.get('/user/blog/:id', BLOG.viewBlogById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

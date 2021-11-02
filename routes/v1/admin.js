@@ -50,6 +50,7 @@ const PRIVACY_INFO = require('../../controllers/admin/PrivacyNDataPolicy');
 const CONTACT_INFO = require('../../controllers/admin/ContactInfo');
 const USER_ENQUIRY = require('../../controllers/admin/UserEnquiry');
 const FAQ = require('../../controllers/admin/FAQ');
+const BLOG = require('../../controllers/admin/Blog');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -113,5 +114,13 @@ router.get('/faq', FAQ.viewAllFAQs);
 router.get('/faq/:id', FAQ.viewFAQById);
 router.put('/faq/:id', FAQ.editFAQ);
 router.delete('/faq/:id', FAQ.deleteFAQ);
+
+router.post('/blog', BLOG.addBlog);
+router.post('/blog/image-upload', upload1.single("image"), BLOG.imageUpload);
+router.post('/blog/audio-upload', upload2.single("audio"), BLOG.audioUpload);
+router.get('/blog', BLOG.viewAllBlogs);
+router.get('/blog/:id', BLOG.viewBlogById);
+router.put('/blog/:id', BLOG.editBlog);
+router.delete('/blog/:id', BLOG.deleteBlog);
 
 module.exports = router;
