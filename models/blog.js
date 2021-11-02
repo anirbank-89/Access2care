@@ -14,7 +14,7 @@ const BLOG_SCHEMA = new Schema({
         required: true,
     },
     author: {
-        type: Array,
+        type: String,
         required: true
     },
     created_at: {
