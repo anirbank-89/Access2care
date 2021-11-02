@@ -29,6 +29,21 @@ var addNEditInfo = async (req, res) => {
         contactInfoData.address = req.body.address;
     }
     if (
+        req.body.image != "" ||
+        req.body.image != null ||
+        typeof req.body.image != "undefined"
+    ) {
+        contactInfoData.image = req.body.image;
+    }
+    if (
+        req.body.audio != "" ||
+        req.body.audio != null ||
+        typeof req.body.audio != "undefined"
+    ) {
+        contactInfoData.audio = req.body.audio;
+    }
+
+    if (
         req.body.info_id == "" ||
         req.body.info_id == null ||
         typeof req.body.info_id == "undefined"
