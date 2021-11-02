@@ -51,6 +51,7 @@ const CONTACT_INFO = require('../../controllers/admin/ContactInfo');
 const USER_ENQUIRY = require('../../controllers/admin/UserEnquiry');
 const FAQ = require('../../controllers/admin/FAQ');
 const BLOG = require('../../controllers/admin/Blog');
+const TERMS_N_CONDITN = require('../../controllers/admin/TermsNConditn');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -122,5 +123,13 @@ router.get('/blog', BLOG.viewAllBlogs);
 router.get('/blog/:id', BLOG.viewBlogById);
 router.put('/blog/:id', BLOG.editBlog);
 router.delete('/blog/:id', BLOG.deleteBlog);
+
+router.post('/terms-and-condition', TERMS_N_CONDITN.addTerms);
+router.post('/terms-and-condition/audio-upload', upload2.single("audio"), TERMS_N_CONDITN.audioUpload);
+router.post('/terms-and-condition/image-upload', upload1.single("image"), TERMS_N_CONDITN.imageUpload);
+router.get('/terms-and-condition', TERMS_N_CONDITN.viewAllTerms);
+router.get('/terms-and-condition/:id', TERMS_N_CONDITN.viewTermsById);
+router.put('/terms-and-condition/:id', TERMS_N_CONDITN.editTerms);
+router.delete('/terms-and-condition/:id', TERMS_N_CONDITN.deleteTerms);
 
 module.exports = router;

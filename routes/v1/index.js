@@ -48,6 +48,7 @@ const CONTACT_INFO = require('../../controllers/user/ContactInfo');
 const USER_ENQUIRY = require('../../controllers/user/UserEnquiry');
 const FAQ = require('../../controllers/user/FAQ');
 const BLOG = require('../../controllers/user/Blog');
+const TERMS_N_CONDITN = require('../../controllers/user/TermsNConditn');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -92,6 +93,9 @@ router.get('/user/faq/:id', FAQ.viewFAQById);
 
 router.get('/user/blog', BLOG.viewAllBlogs);
 router.get('/user/blog/:id', BLOG.viewBlogById);
+
+router.get('/user/terms-and-condition', TERMS_N_CONDITN.viewAllTerms);
+router.get('/user/terms-and-condition/:id', TERMS_N_CONDITN.viewTermsById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);
