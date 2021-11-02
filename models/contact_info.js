@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 const CONTACT_INFO_SCHEMA = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    phone: Array,
+    phone: String,
     address: String,
     image: String,
     audio: String
