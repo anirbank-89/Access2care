@@ -53,6 +53,7 @@ const FAQ = require('../../controllers/admin/FAQ');
 const BLOG = require('../../controllers/admin/Blog');
 const TERMS_N_CONDITN = require('../../controllers/admin/TermsNConditn');
 const CLINIC_CATEGORY = require('../../controllers/admin/ClinicCategory');
+const CLINIC = require('../../controllers/admin/Clinic');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -136,5 +137,12 @@ router.delete('/terms-and-condition/:id', TERMS_N_CONDITN.deleteTerms);
 router.post('/clinic-category', CLINIC_CATEGORY.addCategory);
 router.get('/clinic-category', CLINIC_CATEGORY.getAllCategories);
 router.delete('/clinic-category/:id', CLINIC_CATEGORY.deleteCategory);
+
+router.post('/clinic', CLINIC.addClinic);
+router.post('/clinic/image-upload', upload1.single("image"), CLINIC.imageUpload);
+router.post('/clinic/audio-upload', upload1.single("audio"), CLINIC.audioUpload);
+router.get('/clinic', CLINIC.getAllClinics);
+router.get('/clinic/:id', CLINIC.getClinicById);
+router.delete('/clinic/:id', CLINIC.deleteClinic);
 
 module.exports = router;
