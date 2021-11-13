@@ -115,9 +115,9 @@ var getAllClinics = async (req, res) => {
                 as: "category_data"
             }
         },
-        // {
-        //     $unwind: "$category_data"
-        // },
+        {
+            $unwind: "$category_data"
+        },
         {
             $project: {
                 __v: 0
@@ -182,6 +182,62 @@ var getClinicById = async (req, res) => {
         });
 }
 
+var editClinic = async (req, res) => {
+    const V = new Validator(req.body, {
+        clinic_name: 'required',
+        address: 'required',
+        mobile: 'required',
+        email: 'required|email',
+    });
+    let matched = await V.check().then(val => val);
+
+    if (!matched) {
+        return res.status(400).json({ status: false, errors: V.errors });
+    }
+
+    let clinicData = {
+        cat_id: mongoose.Types.ObjectId(req.body.cat_id),
+        clinic_name: req.body.clinic_name,
+        address: req.body.address,
+        mobile: Number(req.body.mobile),
+        email: req.body.email
+    }
+    if (req.body.contact_name != "" || req.body.contact_name != null || typeof req.body.contact_name != "undefined") {
+        clinicData.contact_name = req.body.contact_name;
+    }
+    if (req.body.telephone != "" || req.body.telephone != null || typeof req.body.telephone != "undefined") {
+        clinicData.telephone = req.body.telephone;
+    }
+    if (req.body.image != "" || req.body.image != null || typeof req.body.image != "undefined") {
+        clinicData.image = req.body.image;
+    }
+    if (req.body.audio != "" || req.body.audio != null || typeof req.body.audio != "undefined") {
+        clinicData.audio = req.body.audio;
+    }
+
+    var id = req.params.id;
+
+    return CLINIC.findOneAndUpdate(
+        { _id: mongoose.Types.ObjectId(id) }, 
+        clinicData, 
+        { new: true }
+        )
+        .then(data => {
+            res.status(200).json({
+                status: true,
+                message: "Data edited successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: false,
+                message: "Invalid id.",
+                error: err.message
+            });
+        });
+}
+
 var deleteClinic = async (req, res) => {
     var id = req.params.id;
 
@@ -208,5 +264,6 @@ module.exports = {
     audioUpload,
     getAllClinics,
     getClinicById,
+    editClinic,
     deleteClinic
 }

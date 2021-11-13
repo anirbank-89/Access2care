@@ -144,5 +144,6 @@ router.post('/clinic/audio-upload', upload1.single("audio"), CLINIC.audioUpload)
 router.get('/clinic', CLINIC.getAllClinics);
 router.get('/clinic/:id', CLINIC.getClinicById);
 router.delete('/clinic/:id', CLINIC.deleteClinic);
+router.put('/clinic/:id', CLINIC.editClinic);
 
 module.exports = router;
