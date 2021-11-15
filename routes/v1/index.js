@@ -49,6 +49,8 @@ const USER_ENQUIRY = require('../../controllers/user/UserEnquiry');
 const FAQ = require('../../controllers/user/FAQ');
 const BLOG = require('../../controllers/user/Blog');
 const TERMS_N_CONDITN = require('../../controllers/user/TermsNConditn');
+const CLINIC_CATEGORY = require('../../controllers/user/ClinicCategory');
+const CLINIC = require('../../controllers/user/Clinic');
 /**----------------- Controller section end -----------------*/
 
 const middleware = require('../../service/middleware').middleware;
@@ -96,6 +98,12 @@ router.get('/user/blog/:id', BLOG.viewBlogById);
 
 router.get('/user/terms-and-condition', TERMS_N_CONDITN.viewAllTerms);
 router.get('/user/terms-and-condition/:id', TERMS_N_CONDITN.viewTermsById);
+
+router.get('/user/clinic-category', CLINIC_CATEGORY.getAllCategories);
+router.get('/user/clinic-category/:id', CLINIC_CATEGORY.getCategoryById);
+
+router.get('/user/clinic', CLINIC.getAllClinics);
+router.get('/user/clinic/:id', CLINIC.getClinicById);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

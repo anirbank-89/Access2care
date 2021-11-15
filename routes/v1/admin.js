@@ -54,6 +54,7 @@ const BLOG = require('../../controllers/admin/Blog');
 const TERMS_N_CONDITN = require('../../controllers/admin/TermsNConditn');
 const CLINIC_CATEGORY = require('../../controllers/admin/ClinicCategory');
 const CLINIC = require('../../controllers/admin/Clinic');
+const SLOT = require('../../controllers/admin/slots/Slots');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -145,5 +146,9 @@ router.get('/clinic', CLINIC.getAllClinics);
 router.get('/clinic/:id', CLINIC.getClinicById);
 router.delete('/clinic/:id', CLINIC.deleteClinic);
 router.put('/clinic/:id', CLINIC.editClinic);
+
+router.post('/slot', SLOT.addSlot);
+router.get('/slot', SLOT.viewSlots);
+router.delete('/slot/:id', SLOT.deleteSlot);
 
 module.exports = router;
