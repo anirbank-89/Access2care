@@ -6,7 +6,7 @@
  */
 var user = {};
 var AdminController = require('../controllers/auth/Admin');
-// var UserController = require('../Controller/Auth/User');
+var ClinicController = require('../controllers/user/Clinic');
 
 
 
@@ -17,6 +17,9 @@ const permission = [
     },
     {
         url: "/admin/register",
+    },
+    {
+        url: "/clinics/login",
     },
     {
         url: "/user/login",
@@ -45,10 +48,9 @@ user.middleware = async (req, res, next) => {
             if (userType == "Admin") {
                 userData = await AdminController.getTokenData(authorization);
             }
-            // if (userType == "User") {
-            //     userData = await UserController.getTokenData(authorization);
-            // }
-
+            if (userType == "Clinic") {
+                userData = await ClinicController.getTokenData(authorization);
+            }
            
             if (userData && userData != null) {
                     userData.password = null;

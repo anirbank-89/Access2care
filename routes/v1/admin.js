@@ -144,8 +144,8 @@ router.post('/clinic/image-upload', upload1.single("image"), CLINIC.imageUpload)
 router.post('/clinic/audio-upload', upload1.single("audio"), CLINIC.audioUpload);
 router.get('/clinic', CLINIC.getAllClinics);
 router.get('/clinic/:id', CLINIC.getClinicById);
-router.delete('/clinic/:id', CLINIC.deleteClinic);
 router.put('/clinic/:id', CLINIC.editClinic);
+router.delete('/clinic/:id', CLINIC.deleteClinic);
 
 router.post('/slot', SLOT.addSlot);
 router.get('/slot', SLOT.viewSlots);

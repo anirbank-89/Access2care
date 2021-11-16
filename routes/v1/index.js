@@ -60,6 +60,7 @@ const SLOT = require('../../controllers/user/slots/Slots');
 const middleware = require('../../service/middleware').middleware;
 
 const AdminRoute = require('./admin');
+const ClinicRoute = require('./user');
 
 /**====================== without login url ====================== */
 // GET home page
@@ -111,14 +112,12 @@ router.get('/user/clinic/:id', CLINICS.getClinicById);
 
 // router.get('/user/slot', SLOT.viewSlots);
 
-router.post('/clinic-login', CLINIC_LOGIN.login);
+router.post('/clinics/login', CLINIC_LOGIN.login);
 /**==================== without login url end =====================*/
 
 router.use(middleware);
 
-
-
-
 router.use('/admin', AdminRoute);
+router.use('/clinics', ClinicRoute);
 
 module.exports = router;
