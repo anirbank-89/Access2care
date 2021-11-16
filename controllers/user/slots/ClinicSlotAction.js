@@ -15,6 +15,8 @@ var addSlot = async (req, res) => {
 
     let slotData = {
         _id: mongoose.Types.ObjectId(),
+        clinic_id: mongoose.Types.ObjectId(req.body.clinic_id),
+        cat_id: mongoose.Types.ObjectId(req.body.cat_id),
         start_time: req.body.start_time
     }
 
@@ -38,8 +40,10 @@ var addSlot = async (req, res) => {
     });
 }
 
-var viewSlots = async (req, res) => {
-    var slots = await SLOT.find().exec()
+var viewSlotsPerClinic = async (req, res) => {
+    var slots = await SLOT.find(
+        {clinic_id: mongoose.Types.ObjectId(req.body.clinic_id)}
+        ).exec()
 
     if (slots.length > 0) {
         return res.status(200).json({
@@ -79,6 +83,6 @@ var deleteSlot = async (req, res) => {
 
 module.exports = {
     addSlot,
-    viewSlots,
+    viewSlotsPerClinic,
     deleteSlot
 }

@@ -1,9 +1,11 @@
 var mongoose = require("mongoose");
 
-const SLOTS = require("../../../models/slots/slots");
+const SLOT = require("../../../models/slots/slots");
 
-var viewSlots = async (req, res) => {
-    var slots = await SLOTS.find().exec()
+var viewSlotsPerClinic = async (req, res) => {
+    var slots = await SLOT.find(
+        {clinic_id: mongoose.Types.ObjectId(req.body.clinic_id)}
+        ).exec()
 
     if (slots.length > 0) {
         return res.status(200).json({
@@ -21,8 +23,8 @@ var viewSlots = async (req, res) => {
     }
 }
 
-var bookSlot = async (req,res)=>{}
+var book
 
 module.exports = {
-    viewSlots
+    viewSlotsPerClinic
 }

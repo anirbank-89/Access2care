@@ -11,7 +11,16 @@ const USER_BOOKED_SLOT = new Schema({
         type: String,
         required: true
     },
-    
+    phone: {
+        type: Number,
+        required: true
+    },
+    age: Number,
+    rating: {
+        type: Number,
+        required: true
+    },
+    comment: String,
     date_of_booking: {
         type: Date,
         default: moment.tz(new Date(), "Asia/Kolkata")

@@ -53,14 +53,14 @@ const CLINIC_CATEGORY = require('../../controllers/user/ClinicCategory');
 const CLINICS = require("../../controllers/user/Clinic");
 /**------------------ Clinic dashboard------------------------ */
 const CLINIC_LOGIN = require('../../controllers/auth/Clinic');
-const SLOT = require('../../controllers/user/slots/Slots');
+const USER_SLOT_ACTION = require('../../controllers/user/slots/UserSlotActions');
 /**---------------- Clinic dashboard end --------------------- */
 /**================== Controller section end ==================*/
 
 const middleware = require('../../service/middleware').middleware;
 
 const AdminRoute = require('./admin');
-const ClinicRoute = require('./user');
+const ClinicRoute = require('./clinic');
 
 /**====================== without login url ====================== */
 // GET home page
@@ -69,6 +69,8 @@ router.get('/', (req, res, next) => {
 });
 router.post('/admin/register', ADMIN.register);
 router.post('/admin/login', ADMIN.login);
+
+router.post('/clinics/login', CLINIC_LOGIN.login);
 
 router.post('/user/audio-upload', upload.single("audio"), USER_ASSESSMENT_TEST.uploadAudio2);
 
@@ -110,9 +112,7 @@ router.get('/user/clinic-category/:id', CLINIC_CATEGORY.getCategoryById);
 router.get('/user/clinic', CLINICS.getAllClinics);
 router.get('/user/clinic/:id', CLINICS.getClinicById);
 
-// router.get('/user/slot', SLOT.viewSlots);
-
-router.post('/clinics/login', CLINIC_LOGIN.login);
+router.get('/user/slot', USER_SLOT_ACTION.viewSlotsPerClinic);
 /**==================== without login url end =====================*/
 
 router.use(middleware);
