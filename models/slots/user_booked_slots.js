@@ -7,6 +7,11 @@ const USER_BOOKED_SLOT = new Schema({
     clinic_id: mongoose.Schema.Types.ObjectId,
     clinic_cat_id: mongoose.Schema.Types.ObjectId,
     slot_id: mongoose.Schema.Types.ObjectId,
+    name: {
+        type: String,
+        required: true
+    },
+    
     date_of_booking: {
         type: Date,
         default: moment.tz(new Date(), "Asia/Kolkata")

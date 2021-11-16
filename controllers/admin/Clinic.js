@@ -1,10 +1,17 @@
 var mongoose = require("mongoose");
 const { Validator } = require("node-input-validator");
+var passwordHash = require("password-hash");
+var jwt = require('jsonwebtoken');
 var fs = require("fs");
 
 const CLINIC = require("../../models/clinic");
+const ADMIN = require("../../models/admin");
 var Upload = require("../../service/upload");
 var cloudinaryConfig = require("../../service/cloudinary");
+
+function createToken (data) {
+    return jwt.sign(data, 'DonateSmile');
+}
 
 var addClinic = async (req, res) => {
     const V = new Validator(req.body, {
@@ -12,6 +19,7 @@ var addClinic = async (req, res) => {
         address: 'required',
         mobile: 'required',
         email: 'required|email',
+        password: 'required'
     });
     let matched = await V.check().then(val => val);
 
@@ -25,7 +33,9 @@ var addClinic = async (req, res) => {
         clinic_name: req.body.clinic_name,
         address: req.body.address,
         mobile: Number(req.body.mobile),
-        email: req.body.email
+        email: req.body.email,
+        password: passwordHash.generate(req.body.password),
+        token: createToken(req.body)
     }
     if (req.body.contact_name != "" || req.body.contact_name != null || typeof req.body.contact_name != "undefined") {
         clinicData.contact_name = req.body.contact_name;

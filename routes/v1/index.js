@@ -35,7 +35,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-/**------------------- Controller section -------------------*/
+/**==================== Controller section ====================*/
 const ADMIN = require('../../controllers/auth/Admin');
 const USER_ASSESSMENT_TEST = require('../../controllers/user/AssessmentTest');
 const HOME_BANNER = require('../../controllers/user/HomeBanner');
@@ -50,8 +50,12 @@ const FAQ = require('../../controllers/user/FAQ');
 const BLOG = require('../../controllers/user/Blog');
 const TERMS_N_CONDITN = require('../../controllers/user/TermsNConditn');
 const CLINIC_CATEGORY = require('../../controllers/user/ClinicCategory');
-const CLINIC = require('../../controllers/user/Clinic');
-/**----------------- Controller section end -----------------*/
+const CLINICS = require("../../controllers/user/Clinic");
+/**------------------ Clinic dashboard------------------------ */
+const CLINIC_LOGIN = require('../../controllers/auth/Clinic');
+const SLOT = require('../../controllers/user/slots/Slots');
+/**---------------- Clinic dashboard end --------------------- */
+/**================== Controller section end ==================*/
 
 const middleware = require('../../service/middleware').middleware;
 
@@ -102,8 +106,12 @@ router.get('/user/terms-and-condition/:id', TERMS_N_CONDITN.viewTermsById);
 router.get('/user/clinic-category', CLINIC_CATEGORY.getAllCategories);
 router.get('/user/clinic-category/:id', CLINIC_CATEGORY.getCategoryById);
 
-router.get('/user/clinic', CLINIC.getAllClinics);
-router.get('/user/clinic/:id', CLINIC.getClinicById);
+router.get('/user/clinic', CLINICS.getAllClinics);
+router.get('/user/clinic/:id', CLINICS.getClinicById);
+
+// router.get('/user/slot', SLOT.viewSlots);
+
+router.post('/clinic-login', CLINIC_LOGIN.login);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

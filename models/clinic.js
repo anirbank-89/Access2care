@@ -1,4 +1,6 @@
 var mongoose = require("mongoose");
+var passwordHash = require("password-hash");
+
 var Schema = mongoose.Schema;
 
 const CLINIC_SCHEMA = new Schema({
@@ -25,8 +27,20 @@ const CLINIC_SCHEMA = new Schema({
         required: true,
         unique: true
     },
+    password: {
+        type: String,
+        required: true,
+    },
+    token: {
+        type: String,
+        unique: true
+    },
     image: String,
     audio: String
 });
+
+CLINIC_SCHEMA.methods.comparePassword = function (candidatePassword) {
+    return passwordHash.verify(candidatePassword, this.password);
+}
 
 module.exports = mongoose.model("clinic", CLINIC_SCHEMA);
