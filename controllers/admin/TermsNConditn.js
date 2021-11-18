@@ -8,7 +8,10 @@ var cloudinaryConfig = require('../../service/cloudinary');
 
 var addTerms = async (req, res) => {
     const V = new Validator(req.body, {
-        content_1: "required"
+        content_1: "required",
+        content_1d: "required",
+        content_2: "required",
+        content_2d: "required"
     });
     let matched = V.check().then(val => val);
 
@@ -21,15 +24,18 @@ var addTerms = async (req, res) => {
 
     let termsData = {
         _id: mongoose.Types.ObjectId(),
-        content_1: req.body.content_1
+        content_1: req.body.content_1,
+        content_1d: req.body.content_1d,
+        content_2: req.body.content_2,
+        content_2d: req.body.content_2d
     }
-    if (
-        req.body.content_2 != "" ||
-        req.body.content_2 != null ||
-        typeof req.body.content_2 != "undefined"
-    ) {
-        termsData.content_2 = req.body.content_2;
-    }
+    // if (
+    //     req.body.content_2 != "" ||
+    //     req.body.content_2 != null ||
+    //     typeof req.body.content_2 != "undefined"
+    // ) {
+    //     termsData.content_2 = req.body.content_2;
+    // }
     if (
         req.body.audio != "" ||
         req.body.audio != null ||
@@ -155,7 +161,10 @@ var viewTermsById = async (req, res) => {
 
 var editTerms = async (req, res) => {
     const V = new Validator(req.body, {
-        content_1: 'required',
+        content_1: "required",
+        content_1d: "required",
+        content_2: "required",
+        content_2d: "required"
     });
     let matched = V.check().then(val => val);
 

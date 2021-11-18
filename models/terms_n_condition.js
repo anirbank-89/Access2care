@@ -7,7 +7,18 @@ const TERMS_SCHEMA = new Schema({
         type: String,
         required: true
     },
-    content_2: String,
+    content_1d: {
+        type: String,
+        required: true
+    },
+    content_2: {
+        type: String,
+        required: true
+    },
+    content_2d: {
+        type: String,
+        required: true
+    },
     audio: String,
     image: String
 });
