@@ -3,6 +3,7 @@ const { Validator } = require('node-input-validator');
 var fs = require('fs');
 
 const TERMS_N_CONDITN = require('../../models/terms_n_condition');
+
 var Upload = require('../../service/upload');
 var cloudinaryConfig = require('../../service/cloudinary');
 
@@ -219,6 +220,9 @@ var deleteTerms = async (req, res) => {
             }
         });
 }
+
+
+
 
 module.exports = {
     addTerms,

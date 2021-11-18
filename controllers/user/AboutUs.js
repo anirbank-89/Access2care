@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 const { Validator } = require('node-input-validator');
-
+const FETCH_STATE = require('../../models/all_state');
 var aboutusSegment = require('../../models/about_us');
 
 var viewAllSegments = async (req, res) => {
@@ -43,7 +43,60 @@ var viewSegmentById = async (req, res) => {
     }
 }
 
+var addstate = async (req, res) => {
+    
+
+    let segmentData = {
+        _id: mongoose.Types.ObjectId(),
+        state: req.body.state,
+        stated: req.body.stated
+       
+    }
+   
+    const NEW_SEGMENT = new FETCH_STATE(segmentData);
+
+    return NEW_SEGMENT.save((err, docs) => {
+        if (!err) {
+            res.status(200).json({
+                status: true,
+                message: "New segment for About Us info created.",
+                data: docs
+            });
+        }
+        else {
+            res.status(500).json({
+                status: false,
+                message: "Failed to add segment. Server error.",
+                error: err.message
+            });
+        }
+    });
+}
+
+
+
+const viewAllstate = async (req, res) => {
+    var states = await FETCH_STATE.find().exec();
+    // console.log(states)
+    if (states.length > 0) {
+        return res.status(200).json({
+            status: true,
+            message: "All states and conditions successfully get.",
+            data: states
+        });
+    }
+    else {
+        return res.status(200).json({
+            status: true,
+            message: "No states and condition to show.",
+            data: null
+        });
+    }
+}
+
 module.exports = {
     viewAllSegments,
-    viewSegmentById
+    viewSegmentById,
+    viewAllstate,
+    addstate
 }
