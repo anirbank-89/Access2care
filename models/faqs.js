@@ -8,7 +8,16 @@ const FAQ_SCHEMA = new Schema({
         required: true,
         unique: true
     },
+    question_two:{
+        type: String,
+        required: true,
+        unique: true
+    },
     answer:{
+        type: String,
+        required: true
+    },
+    answer_two:{
         type: String,
         required: true
     },

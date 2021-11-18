@@ -10,7 +10,9 @@ var cloudinaryConfig = require('../../service/cloudinary');
 var addFaq = async (req, res) => {
     const V = new Validator(req.body, {
         question: 'required',
-        answer: 'required'
+        answer: 'required',
+        question_two: 'required',
+        answer_two: 'required'
     });
     let matched = V.check().then(val => val);
 
@@ -21,7 +23,9 @@ var addFaq = async (req, res) => {
     let faqData = {
         _id: mongoose.Types.ObjectId(),
         question: req.body.question,
-        answer: req.body.answer
+        answer: req.body.answer,
+        question_two: req.body.question_two,
+        answer_two: req.body.answer_two
     }
     if (
         req.body.image != "" ||
@@ -145,7 +149,10 @@ var viewFAQById = async (req, res) => {
 var editFAQ = async (req, res) => {
     const V = new Validator(req.body, {
         question: 'required',
-        answer: 'required'
+        answer: 'required',
+        question_two: 'required',
+        answer_two: 'required'
+
     });
     let matched = V.check().then(val => val);
 
