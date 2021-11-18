@@ -7,7 +7,15 @@ const ABOUT_US_SEGMENT = new Schema({
         type: String,
         required: true
     },
+    headingd: {
+        type: String,
+        required: true
+    },
     description: {
+        type: String,
+        required: true
+    },
+    descriptiond: {
         type: String,
         required: true
     },
