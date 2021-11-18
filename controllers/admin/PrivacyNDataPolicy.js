@@ -7,7 +7,9 @@ var privacySegment = require('../../models/privacy_n_data_policy');
 var addSegment = async (req, res) => {
     const V = new Validator(req.body, {
         heading: 'required',
-        description: 'required'
+        description: 'required',
+        headingd: 'required',
+        descriptiond: 'required'
     });
     let matched = V.check().then(val => val);
 
@@ -18,7 +20,9 @@ var addSegment = async (req, res) => {
     let segmentData = {
         _id: mongoose.Types.ObjectId(),
         heading: req.body.heading,
-        description: req.body.description
+        description: req.body.description,
+        headingd: req.body.headingd,
+        descriptiond: req.body.descriptiond
     }
     if (
         req.body.image != "" ||
@@ -98,7 +102,9 @@ var viewSegmentById = async (req, res) => {
 var editSegment = async (req, res) => {
     const V = new Validator(req.body, {
         heading: 'required',
-        description: 'required'
+        description: 'required',
+        headingd: 'required',
+        descriptiond: 'required'
     });
     let matched = V.check().then(val => val);
 
