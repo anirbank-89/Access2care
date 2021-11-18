@@ -90,6 +90,7 @@ router.get('/user/about-us', ABOUT_US_INFO.viewAllSegments);
 router.get('/user/about-us/:id', ABOUT_US_INFO.viewSegmentById);
 router.get('/user/states', ABOUT_US_INFO.viewAllstate);
 router.post('/user/states', ABOUT_US_INFO.addstate);
+router.post('/user/qstn_survey', ABOUT_US_INFO.addsurvey);
 
 router.get('/user/privacy-and-data-policy', PRIVACY_INFO.viewAllSegments);
 router.get('/user/privacy-and-data-policy/:id', PRIVACY_INFO.viewSegmentById);

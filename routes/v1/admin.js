@@ -93,6 +93,7 @@ router.get('/about-us', ABOUT_US_INFO.viewAllSegments);
 router.get('/about-us/:id', ABOUT_US_INFO.viewSegmentById);
 router.put('/about-us/:id', ABOUT_US_INFO.editSegment);
 router.delete('/about-us/:id', ABOUT_US_INFO.deleteSegment);
+router.get('/about-us', ABOUT_US_INFO.viewAllsurvey);
 
 router.post('/privacy-and-data-policy', PRIVACY_INFO.addSegment);
 router.get('/privacy-and-data-policy', PRIVACY_INFO.viewAllSegments);

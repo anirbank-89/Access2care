@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 const { Validator } = require('node-input-validator');
-
+const QSTN_SURVEY = require('../../models/survey');
 var aboutusSegment = require('../../models/about_us');
 
 var addSegment = async (req, res) => {
@@ -160,10 +160,33 @@ var deleteSegment = async (req, res) => {
         });
 }
 
+
+
+var viewAllsurvey = async (req, res) => {
+    var segments = await QSTN_SURVEY.find().exec();
+
+    if (segments.length > 0) {
+        return res.status(200).json({
+            status: true,
+            message: "All segments successfully get.",
+            data: segments
+        });
+    }
+    else {
+        return res.status(200).json({
+            status: true,
+            message: "No data available.",
+            data: null
+        });
+    }
+}
+
+
 module.exports = {
     addSegment,
     viewAllSegments,
     viewSegmentById,
     editSegment,
-    deleteSegment
+    deleteSegment,
+    viewAllsurvey
 }
