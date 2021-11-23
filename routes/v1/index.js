@@ -114,6 +114,7 @@ router.get('/user/clinic-category/:id', CLINIC_CATEGORY.getCategoryById);
 
 router.get('/user/clinic', CLINICS.getAllClinics);
 router.get('/user/clinic/:id', CLINICS.getClinicById);
+router.get('/user/clinic-by-category', CLINICS.getClinicByCategory);
 
 router.get('/user/slot', USER_SLOT_ACTION.viewSlotsPerClinic);
 /**==================== without login url end =====================*/
