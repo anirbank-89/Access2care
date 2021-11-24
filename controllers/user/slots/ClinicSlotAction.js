@@ -128,14 +128,21 @@ var viewAllSlotsPerDay = async (req, res) => {
     }
 }
 
-var deleteSlots = async (req, res) => {
-    return CLINIC_SLOTS.deleteMany(
+var deleteTiming = async (req, res) => {
+    return CLINIC_TIMINGS.findOneAndDelete(
         {
             clinic_id: mongoose.Types.ObjectId(req.body.clinic_id),
-            weekday_name: req.body.weekday_name
+            day_name: req.body.day_name
         }
     )
-        .then(data => { 
+        .then(async (data) => { 
+            var deleteSlots = await CLINIC_SLOTS.deleteMany(
+                {
+                    clinic_id: data.clinic_id,
+                    weekday_name: data.day_name
+                }
+            );
+
             res.status(200).json({
                 status: true,
                 message: "Deleted successfully.",
@@ -196,5 +203,5 @@ const getTimeRanges = function (arr, start_time, end_time, interval, language = 
 module.exports = {
     createSlots,
     viewAllSlotsPerDay,
-    deleteSlots
+    deleteTiming
 }

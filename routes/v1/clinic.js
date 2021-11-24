@@ -19,6 +19,6 @@ router.put('/clinic/update-password/:id', CLINIC.updatePassword);
 
 router.post('/slot', CLINIC_SLOT.createSlots);
 router.get('/slot', CLINIC_SLOT.viewAllSlotsPerDay);
-router.delete('/slot', CLINIC_SLOT.deleteSlots);
+router.delete('/slot', CLINIC_SLOT.deleteTiming);
 
 module.exports = router;
