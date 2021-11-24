@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 const { Validator } = require("node-input-validator");
 
 const CLINIC_TIMINGS = require('../../../models/slots/clinic_timings');
+const CLINIC_SLOTS = require('../../../models/slots/slots');
 
 var createSlots = async (req, res) => {
     CLINIC_TIMINGS.findOne(
@@ -94,13 +95,60 @@ var createSlots = async (req, res) => {
             });
         }
     })
-    .catch(err => {
-        res.status(500).json({
-            status: false,
-            message: "Failed to get data. Server error.",
-            error: err.message
+        .catch(err => {
+            res.status(500).json({
+                status: false,
+                message: "Invalid clinic id. Server error.",
+                error: err.message
+            });
         });
-    });
+}
+
+var viewAllSlotsPerDay = async (req, res) => {
+    var slotsOfADay = await CLINIC_SLOTS.find(
+        {
+            clinic_id: mongoose.Types.ObjectId(req.body.clinic_id),
+            weekday_name: req.body.weekday_name
+        }
+    ).exec();
+
+    if (slotsOfADay.length > 0) {
+        return res.status(200).json({
+            status: true,
+            message: "Data successfully get.",
+            data: slotsOfADay
+        });
+    }
+    else {
+        return res.status(200).json({
+            status: true,
+            message: "No slots added for the day.",
+            data: null
+        });
+    }
+}
+
+var deleteSlots = async (req, res) => {
+    return CLINIC_SLOTS.deleteMany(
+        {
+            clinic_id: mongoose.Types.ObjectId(req.body.clinic_id),
+            weekday_name: req.body.weekday_name
+        }
+    )
+        .then(data => { 
+            res.status(200).json({
+                status: true,
+                message: "Deleted successfully.",
+                data: data
+            });
+        })
+        .catch(err => { 
+            res.status(500).json({
+                status: false,
+                message: "Failed to delete data. Server error",
+                error: err.message
+            });
+        });
 }
 
 /**=============Utility functions section start==================**/
@@ -146,5 +194,7 @@ const getTimeRanges = function (arr, start_time, end_time, interval, language = 
 }
 /**===========Utility functions section start end================**/
 module.exports = {
-    createSlots
+    createSlots,
+    viewAllSlotsPerDay,
+    deleteSlots
 }

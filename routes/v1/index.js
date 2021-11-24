@@ -53,6 +53,7 @@ const CLINIC_CATEGORY = require('../../controllers/user/ClinicCategory');
 const CLINICS = require("../../controllers/user/Clinic");
 /**------------------ Clinic dashboard------------------------ */
 const CLINIC_LOGIN = require('../../controllers/auth/Clinic');
+const CLINIC_SLOT = require('../../controllers/user/slots/ClinicSlotAction');
 const USER_SLOT_ACTION = require('../../controllers/user/slots/UserSlotActions');
 /**---------------- Clinic dashboard end --------------------- */
 /**================== Controller section end ==================*/
@@ -115,6 +116,8 @@ router.get('/user/clinic-category/:id', CLINIC_CATEGORY.getCategoryById);
 router.get('/user/clinic', CLINICS.getAllClinics);
 router.get('/user/clinic/:id', CLINICS.getClinicById);
 router.get('/user/clinic-by-category', CLINICS.getClinicByCategory);
+
+router.get('/user/slot', CLINIC_SLOT.viewAllSlotsPerDay);
 
 router.get('/user/slot', USER_SLOT_ACTION.viewSlotsPerClinic);
 /**==================== without login url end =====================*/
