@@ -120,6 +120,7 @@ router.get('/user/clinic-by-category', CLINICS.getClinicByCategory);
 router.get('/user/slot', CLINIC_SLOT.viewAllSlotsPerDay);
 
 router.post('/user/book-appointment', USER_SLOT_ACTION.bookSlot);
+router.get('/user/booking-details/:id', USER_SLOT_ACTION.viewBookedSlotInfo);
 /**==================== without login url end =====================*/
 
 router.use(middleware);

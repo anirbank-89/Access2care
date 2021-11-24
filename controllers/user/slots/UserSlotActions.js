@@ -53,6 +53,49 @@ var bookSlot = async (req, res) => {
         });
 }
 
+var viewBookedSlotInfo = async (req,res)=>{
+    var id = req.params.id;
+
+    return USER_BOOKED_SLOTS.aggregate([
+        {
+            $match: {
+                _id: mongoose.Types.ObjectId(id)
+            }
+        },
+        {
+            $lookup: {
+                from: "clinics",
+                localField: "clinic_id",
+                foreignField: "_id",
+                as: "clinic_data"
+            }
+        },
+        {
+            $unwind: "$clinic_data"
+        },
+        {
+            $project: {
+                __v: 0
+            }
+        }
+    ])
+        .then(data => {
+            res.status(200).json({
+                status: true,
+                message: "Data successfully get.",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: false,
+                message: "Invalid id. Server error.",
+                error: err
+            });
+        });
+}
+
 module.exports = {
-    bookSlot
+    bookSlot,
+    viewBookedSlotInfo
 }
