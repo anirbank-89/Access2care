@@ -54,6 +54,7 @@ const BLOG = require('../../controllers/admin/Blog');
 const TERMS_N_CONDITN = require('../../controllers/admin/TermsNConditn');
 const CLINIC_CATEGORY = require('../../controllers/admin/ClinicCategory');
 const CLINIC = require('../../controllers/admin/Clinic');
+const SEXUAL_PRACTICES = require('../../controllers/admin/risk_assessment/SexualPractices');
 /** ------------------ Controllers section end ------------------ */
 
 router.post('/image-upload', upload1.single("image"), Upload.segmentImage);
@@ -146,5 +147,7 @@ router.get('/clinic', CLINIC.getAllClinics);
 router.get('/clinic/:id', CLINIC.getClinicById);
 router.put('/clinic/:id', CLINIC.editClinic);
 router.delete('/clinic/:id', CLINIC.deleteClinic);
+
+router.post('/sexual-practice', SEXUAL_PRACTICES.addPractice);
 
 module.exports = router;

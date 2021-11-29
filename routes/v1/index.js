@@ -51,6 +51,7 @@ const BLOG = require('../../controllers/user/Blog');
 const TERMS_N_CONDITN = require('../../controllers/user/TermsNConditn');
 const CLINIC_CATEGORY = require('../../controllers/user/ClinicCategory');
 const CLINICS = require("../../controllers/user/Clinic");
+const SEXUAL_PRACTICES = require('../../controllers/user/risk_assessment/SexualPractices');
 /**------------------ Clinic dashboard------------------------ */
 const CLINIC_LOGIN = require('../../controllers/auth/Clinic');
 const CLINIC_SLOT = require('../../controllers/user/slots/ClinicSlotAction');
@@ -109,6 +110,8 @@ router.get('/user/blog/:id', BLOG.viewBlogById);
 
 router.get('/user/terms-and-condition', TERMS_N_CONDITN.viewAllTerms);
 router.get('/user/terms-and-condition/:id', TERMS_N_CONDITN.viewTermsById);
+
+router.get('/user/sexual-practice', SEXUAL_PRACTICES.getAll);
 
 router.get('/user/clinic-category', CLINIC_CATEGORY.getAllCategories);
 router.get('/user/clinic-category/:id', CLINIC_CATEGORY.getCategoryById);
